@@ -67,6 +67,9 @@ DJANGO_APPS = [
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    # project apps
+    "rest_framework",
+    "shopmanagement",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
