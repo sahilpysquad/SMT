@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <td> index </td>
+                <td> area name </td>
+                <td> citys  </td>
+                <td> pincode  </td>
+            </tr>
+    </thead>
+    <tbody>
+          {% for area in object_list %}
+           <tr>
+                  <td> {{ forloop.counter }} </td>
+                  <td>{{ area.name }}</td>
+                  <td>{{ area.city }}</td>
+                  <td>{{area.pincode }}</td>
+           </tr>
+           {% endfor %}
+    </tbody>
+{% endblock %}
+    </table>
+</html>
+
