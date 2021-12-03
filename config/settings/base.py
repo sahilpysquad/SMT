@@ -69,7 +69,7 @@ DJANGO_APPS = [
     "django.forms",
     # project apps
     "rest_framework",
-    "shopmanagement",
+    "shop",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",

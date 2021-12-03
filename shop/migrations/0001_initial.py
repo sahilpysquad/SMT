@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('name', models.CharField(max_length=30)),
                 ('pincode', models.IntegerField(primary_key=True, serialize=False)),
-                ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shopmanagement.city')),
+                ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.city')),
             ],
         ),
     ]

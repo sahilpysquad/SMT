@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shopmanagement.models import City, AreaZone
+from shop.models import AreaZone, City
 
 
 @admin.register(City)
@@ -15,4 +15,3 @@ class AreaZoneAdmin(admin.ModelAdmin):
     list_display = ("name", "city", "pincode")
     list_filter = ("name", "city", "pincode")
     ordering = ("name",)
-
