@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shop.models import AreaZone, City, CleaningGroup, Shop, ShopCategory, ShopHistory, Tax, Worker
+from shop.models import AreaZone, City, CleaningGroup, Shop, ShopCategory, ShopHistory, Tax, Worker, SmtUsers
 
 
 class AreaZoneTabularInline(admin.TabularInline):
@@ -55,3 +55,10 @@ class CleaningGroupAdmin(admin.ModelAdmin):
 @admin.register(Worker)
 class WorkerAdmin(admin.ModelAdmin):
     ordering = ("name",)
+
+
+@admin.register(SmtUsers)
+class SmtUserInternal(admin.ModelAdmin):
+    list_display = ("user_roll", "supervisor", "area", "city")
+    list_filter = ("user_roll", "city", "area")
+    ordering = ("user_roll",)

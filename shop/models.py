@@ -91,3 +91,21 @@ class Worker(CommonInfo):
 
     def __str__(self):
         return self.name
+
+
+class SmtUsers(models.Model):
+    TYPE_USER = [
+            ('a', 'Manager'),
+            ('s', 'Supervisor'),
+            ('as', 'Assistant Supervisor'),
+            ('o', 'Owner'),
+    ]
+    user_roll = models.CharField(choices=TYPE_USER, max_length=100)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    area = models.ForeignKey(AreaZone, on_delete=models.CASCADE)
+    # supervisor = SmtUsers.objects.filter(user_roll='s')
+    supervisor = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    # supervisor = models.ForeignKey('self', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user_roll
