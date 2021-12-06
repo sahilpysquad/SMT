@@ -71,7 +71,7 @@ class Shop(CommonInfo):
     shop_category = models.ForeignKey(ShopCategory, on_delete=models.CASCADE)
     owner = models.ForeignKey(SmtUsers, on_delete=models.CASCADE, related_name="owners", null=True, blank=True)
     assistant_supervisor = models.ForeignKey(SmtUsers, on_delete=models.CASCADE, related_name="assistants", null=True, blank=True)
-    shop_status = models.ForeignKey(max_length=1, choices=SHOP_STATUS_CHOICES)
+    shop_status = models.CharField(max_length=1, choices=SHOP_STATUS_CHOICES)
 
     def __str__(self):
         return self.name
