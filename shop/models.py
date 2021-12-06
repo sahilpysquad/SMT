@@ -1,9 +1,10 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class City(models.Model):
     name = models.CharField(max_length=30, unique=True)
-    code = models.IntegerField()
+    code = models.IntegerField(primary_key=True)
 
     def __str__(self):
         return self.name
@@ -11,7 +12,7 @@ class City(models.Model):
 
 class AreaZone(models.Model):
     name = models.CharField(max_length=30)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="cities")
     pincode = models.IntegerField(primary_key=True)
 
     def __str__(self):
@@ -71,7 +72,7 @@ class Shop(CommonInfo):
     shop_category = models.ForeignKey(ShopCategory, on_delete=models.CASCADE)
     owner = models.ForeignKey(SmtUsers, on_delete=models.CASCADE, related_name="owners", null=True, blank=True)
     assistant_supervisor = models.ForeignKey(SmtUsers, on_delete=models.CASCADE, related_name="assistants", null=True, blank=True)
-    shop_status = models.CharField(max_length=1, choices=SHOP_STATUS_CHOICES)
+    shop_status = models.CharField(max_length=1, choices=SHOP_STATUS_CHOICES, )
 
     def __str__(self):
         return self.name
@@ -92,6 +93,13 @@ class CleaningGroup(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CleaningRecord(models.Model):
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="shop_records")
+    cleaning_date = models.DateTimeField()
+    cleaning_range = models.IntegerField(default=0, validators=[MaxValueValidator(100), MinValueValidator(0)])
+    cleaning_group = models.ForeignKey(CleaningGroup, on_delete=models.CASCADE, related_name="cleaning_groups")
 
 
 class Worker(CommonInfo):

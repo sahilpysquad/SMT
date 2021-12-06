@@ -1,6 +1,6 @@
 from django import forms
 
-from shop.models import City
+from shop.models import City, AreaZone
 
 
 class CreateCityForm(forms.ModelForm):
@@ -18,3 +18,5 @@ class CreateCityForm(forms.ModelForm):
         if City.objects.filter(code=code).exists():
             raise forms.ValidationError("This code can not be assigned")
         return data
+
+

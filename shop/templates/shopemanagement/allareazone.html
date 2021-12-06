@@ -8,13 +8,19 @@
   <title>Title</title>
 </head>
 {% block content %}
+    <br>
+    <form>
+<!--      {% csrf_token %}-->
+      <input name="search_field" type="search">
+      <input type="submit" value="Search">
+    </form> <br>
     <table class="table">
         <thead>
             <tr>
-                <td> index </td>
-                <td> area name </td>
-                <td> citys  </td>
-                <td> pincode  </td>
+                <td> No. </td>
+                <td> Area Name </td>
+                <td> Cities  </td>
+                <td> Pincode  </td>
             </tr>
     </thead>
     <tbody>
