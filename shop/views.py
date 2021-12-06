@@ -30,11 +30,17 @@ class CreateAreaZone(CreateView):
     template_name = "shopemanagement/createareazone.html"
 
 
+class UpdateAreaZone(UpdateView):
+    model = AreaZone
+    fields = "__all__"
+    success_url = "/"
+    template_name = "shopemanagement/createareazone.html"
+
 class AreaZoneListView(ListView):
     model = AreaZone
     template_name = "shopemanagement/allareazone.html"
     # paginate_by = 2
-    
+
     def get_queryset(self):
         areazones = AreaZone.objects.all()
         search_city = self.request.GET.get("search_field")
