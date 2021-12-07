@@ -1,4 +1,4 @@
-
+import django.core.validators
 from django.db import migrations, models
 import django.db.models.deletion
 
@@ -21,9 +21,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='City',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=30, unique=True)),
-                ('code', models.IntegerField()),
+                ('code', models.IntegerField(primary_key=True, serialize=False)),
             ],
         ),
         migrations.CreateModel(
@@ -46,7 +45,7 @@ class Migration(migrations.Migration):
                 ('address', models.TextField()),
                 ('create_date', models.DateTimeField(auto_now_add=True)),
                 ('update_date', models.DateTimeField(auto_now=True)),
-            ],
+                ('shop_status', models.CharField(choices=[('A', 'Accepted'), ('P', 'Pending'), ('C', 'Canceled')], default='P', max_length=1)),            ],
             options={
                 'abstract': False,
             },
@@ -127,9 +126,19 @@ class Migration(migrations.Migration):
             name='shop_category',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.shopcategory'),
         ),
+        migrations.CreateModel(
+            name='CleaningRecord',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('cleaning_date', models.DateTimeField()),
+                ('cleaning_range', models.IntegerField(default=0, validators=[django.core.validators.MaxValueValidator(100), django.core.validators.MinValueValidator(0)])),
+                ('cleaning_group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cleaning_groups', to='shop.cleaninggroup')),
+                ('shop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='shop_records', to='shop.shop')),
+            ],
+        ),
         migrations.AddField(
             model_name='areazone',
             name='city',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.city'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cities', to='shop.city'),
         ),
     ]

@@ -31,15 +31,19 @@
                   <td>{{ city.name }}</td>
                   <td>{{city.code }}</td>
                   <td>
+                    {% if request.user.user_roll == 'm' %}
                     <button type="button" ><a href="{% url 'update-city' city.code %}">Update</a></button>
                     <button type="button" ><a href="{% url 'delete-city' city.code %}">Delete</a></button>
+                    {% endif %}
                   </td>
            </tr>
         {% endfor %}
   </tbody>
     </table>
 <br>
+{% if request.user.user_roll == 'm' %}
 <button type="button"><a href="{% url 'create-city' %}">Add Cities</a></button>
+{% endif %}
 {% endblock %}
 </html>
 

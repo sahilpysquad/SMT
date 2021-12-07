@@ -1,6 +1,6 @@
 from django.urls import path
 
-from shop.views import *
+from .views import *
 
 urlpatterns = [
     path("allcities/",AllCities.as_view(), name="all-cities"),
@@ -10,5 +10,5 @@ urlpatterns = [
     path("updatecity/<int:pk>/", UpdateCity.as_view(), name="update-city"),
     path("updatearea/<int:pk>/", UpdateAreaZone.as_view(), name="update-area"),
     path("deletecity/<int:pk>/", DeleteCity.as_view(), name="delete-city"),
-    path("deletearea/<int:pk>/", DeleteArea.as_view(), name="delete-area"),
+    path("deletearea/<int:pk>/", DeleteArea.as_view(), name="delete-area")
 ]

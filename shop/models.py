@@ -39,6 +39,7 @@ class SmtUsers(CommonInfo):
             ('as', 'Assistant Supervisor'),
             ('o', 'Owner'),
     ]
+
     user_roll = models.CharField(choices=TYPE_USER, max_length=100)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="user_cities")
     area = models.ForeignKey(AreaZone, on_delete=models.CASCADE, related_name="user_areas", null=True, blank=True)

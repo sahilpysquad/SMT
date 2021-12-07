@@ -33,14 +33,18 @@
                   <td>{{ area.city }}</td>
                   <td>{{area.pincode }}</td>
                   <td>
+                    {% if request.user.user_roll == 'm' %}
                     <button type="button"><a href="{% url 'update-area' area.pincode %}">Update</a></button>
                     <button type="button"><a href="{% url 'delete-area' area.pincode %}">Delete</a></button>
+                    {% endif %}
                   </td>
            </tr>
            {% endfor %}
     </tbody>
     </table><br>
+      {% if request.user.user_roll == 'm' %}
       <button type="button"><a href="{% url 'create-area' %}">Add Area Zone</a></button>
+        {% endif %}
 {% endblock %}
 </html>
 

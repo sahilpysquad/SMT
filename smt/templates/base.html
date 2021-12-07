@@ -62,6 +62,22 @@
                 <a class="nav-link" href="{% url 'all-areazones' %}">Areazones</a>
               </li>
               {% if request.user.is_authenticated %}
+                {% if request.user.user_roll == 'o' %}
+                <h1>{{ request.user.user_roll }}</h1>
+                <h1>i am here owner</h1>
+                {% endif %}
+              {% if request.user.user_roll == 'm' %}
+                <h1>{{ request.user.user_roll }}</h1>
+                <h1>i am here manager</h1>
+                {% endif %}
+              {% if request.user.user_roll == 's' %}
+                <h1>{{ request.user.user_roll }}</h1>
+                <h1>i am here supervisor</h1>
+                {% endif %}
+              {% if request.user.user_roll == 'as' %}
+                <h1>{{ request.user.user_roll }}</h1>
+                <h1>i am here assistant Supervisor</h1>
+                {% endif %}
                 <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #}
                   <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% translate "My Profile" %}</a>

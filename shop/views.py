@@ -1,7 +1,8 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
+from django.http import response
 from shop.forms import CreateCityForm
-from shop.models import City, AreaZone, Shop
+from shop.models import City, AreaZone, Shop, SmtUsers
+
 
 
 class AllCities(ListView):
@@ -14,6 +15,18 @@ class CreateCity(CreateView):
     form_class = CreateCityForm
     template_name = "shopemanagement/createcity.html"
     success_url = "/shop/allcities/"
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        return super().post(request, *args, **kwargs)
+
+    # def post(self, request, *args, **kwargs):
+    #     if request.user.user_roll == 'm':
+    #         self.object = None
+    #         print("i am in user manager\n/n/", request.user.user_roll)
+    #         return  super().post(self, request, *request, **kwargs)
+    #     else:
+    #         return response("you are not allowd to create city")
 
 
 class UpdateCity(UpdateView):
