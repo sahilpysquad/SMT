@@ -64,6 +64,7 @@ class WorkerAdmin(admin.ModelAdmin):
 
 @admin.register(SmtUsers)
 class SmtUserInternal(admin.ModelAdmin):
-    list_display = ("user_roll", "supervisor", "area", "city")
-    list_filter = ("user_roll", "city", "area")
-    ordering = ("user_roll",)
+    # list_display = ("user_roll", "supervisor", "area", "city")
+    # list_filter = ("user_roll", "city", "area")
+    # ordering = ("user_roll",)
+    pass

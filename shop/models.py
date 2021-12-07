@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -114,11 +115,9 @@ class Worker(CommonInfo):
         (2, "Two Dose")
     )
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="worker_shops", null=True, blank=True)
-    cleaning_group = models.ForeignKey(CleaningGroup, on_delete=models.CASCADE, related_name="groups", null=True, blank=True)
+    cleaning_group = models.ForeignKey(CleaningGroup, on_delete=models.CASCADE, related_name="cleaning_groups_worker", null=True, blank=True)
     worker_choice = models.CharField(max_length=1, choices=WORKER_CHOICES)
     vaccine_dose = models.IntegerField(choices=VACCINE_DOSE_CHOICES)
 
     def __str__(self):
         return self.name
-
-

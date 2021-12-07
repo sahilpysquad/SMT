@@ -10,7 +10,6 @@
 {% block content %}
     <br>
     <form>
-<!--      {% csrf_token %}-->
       <input name="search_field" type="search">
       <input type="submit" value="Search">
     </form> <br>
@@ -22,6 +21,8 @@
                 <td> Area Name </td>
                 <td> Cities  </td>
                 <td> Pincode  </td>
+                <td> Actions</td>
+
             </tr>
     </thead>
     <tbody>
@@ -31,12 +32,15 @@
                   <td>{{ area.name }}</td>
                   <td>{{ area.city }}</td>
                   <td>{{area.pincode }}</td>
+                  <td>
+                    <button type="button"><a href="{% url 'update-area' area.pincode %}">Update</a></button>
+                    <button type="button"><a href="{% url 'delete-area' area.pincode %}">Delete</a></button>
+                  </td>
            </tr>
            {% endfor %}
     </tbody>
+    </table><br>
+      <button type="button"><a href="{% url 'create-area' %}">Add Area Zone</a></button>
 {% endblock %}
-
-
-    </table>
 </html>
 
