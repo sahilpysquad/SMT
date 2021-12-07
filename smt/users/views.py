@@ -21,7 +21,7 @@ user_detail_view = UserDetailView.as_view()
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     model = User
-    fields = ["name"]
+    fields = ["name", 'user_roll']
     success_message = _("Information successfully updated")
 
     def get_success_url(self):
@@ -31,6 +31,9 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return self.request.user.get_absolute_url()
 
     def get_object(self):
+        # import pdb
+        # pdb.set_trace()
+        print("i am object user", self.request.user.user_roll)
         return self.request.user
 
 

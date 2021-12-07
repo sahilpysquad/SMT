@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    $(document).ready(function() {
+    $('#example').DataTable();
+} );
+  </script>
+</head>
+{% block content %}
+<br>
+<br>
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Cities</th>
+                <th>City Code</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for city in object_list %}
+           <tr>
+                  <td> {{ forloop.counter }} </td>
+                  <td>{{ city.name }}</td>
+                  <td>{{city.code }}</td>
+                  <td>
+                    {% if request.user.user_roll == 'm' %}
+                    <button type="button" ><a href="{% url 'update-city' city.code %}">Update</a></button>
+                    <button type="button" ><a href="{% url 'delete-city' city.code %}">Delete</a></button>
+                    {% endif %}
+                  </td>
+           </tr>
+        {% endfor %}
+  </tbody>
+    </table>
+<br>
+{% if request.user.user_roll == 'm' %}
+<button type="button"><a href="{% url 'create-city' %}">Add Cities</a></button>
+{% endif %}
+{% endblock %}
+</html>
+

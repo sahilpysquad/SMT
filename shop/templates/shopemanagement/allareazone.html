@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+{% block content %}
+    <br>
+    <form>
+      <input name="search_field" type="search">
+      <input type="submit" value="Search">
+    </form> <br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td> No. </td>
+                <td> Area Name </td>
+                <td> Cities  </td>
+                <td> Pincode  </td>
+                <td> Actions</td>
+
+            </tr>
+    </thead>
+    <tbody>
+          {% for area in object_list %}
+           <tr>
+                  <td> {{ forloop.counter }} </td>
+                  <td>{{ area.name }}</td>
+                  <td>{{ area.city }}</td>
+                  <td>{{area.pincode }}</td>
+                  <td>
+                    {% if request.user.user_roll == 'm' %}
+                    <button type="button"><a href="{% url 'update-area' area.pincode %}">Update</a></button>
+                    <button type="button"><a href="{% url 'delete-area' area.pincode %}">Delete</a></button>
+                    {% endif %}
+                  </td>
+           </tr>
+           {% endfor %}
+    </tbody>
+    </table><br>
+      {% if request.user.user_roll == 'm' %}
+      <button type="button"><a href="{% url 'create-area' %}">Add Area Zone</a></button>
+        {% endif %}
+{% endblock %}
+</html>
+

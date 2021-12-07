@@ -12,6 +12,8 @@
 
     {% block css %}
     <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Your stuff: Third-party CSS libraries go here -->
@@ -28,7 +30,9 @@
 
       <!-- place project specific Javascript in this file -->
       <script defer src="{% static 'js/project.js' %}"></script>
-
+      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
     {% endblock javascript %}
 
   </head>
@@ -51,7 +55,29 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'about' %}">About</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'all-cities' %}">City</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'all-areazones' %}">Areazones</a>
+              </li>
               {% if request.user.is_authenticated %}
+                {% if request.user.user_roll == 'o' %}
+                <h1>{{ request.user.user_roll }}</h1>
+                <h1>i am here owner</h1>
+                {% endif %}
+              {% if request.user.user_roll == 'm' %}
+                <h1>{{ request.user.user_roll }}</h1>
+                <h1>i am here manager</h1>
+                {% endif %}
+              {% if request.user.user_roll == 's' %}
+                <h1>{{ request.user.user_roll }}</h1>
+                <h1>i am here supervisor</h1>
+                {% endif %}
+              {% if request.user.user_roll == 'as' %}
+                <h1>{{ request.user.user_roll }}</h1>
+                <h1>i am here assistant Supervisor</h1>
+                {% endif %}
                 <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #}
                   <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% translate "My Profile" %}</a>
